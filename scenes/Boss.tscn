@@ -60,6 +60,7 @@ margin_left = -48.0
 margin_top = -36.0
 margin_right = 48.0
 margin_bottom = 36.0
+mouse_filter = 2
 
 [node name="HealthBar" parent="Control" instance=ExtResource( 1 )]
 

@@ -21,6 +21,7 @@ current = true
 [node name="UI" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -31,6 +32,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 504.0
 margin_bottom = 280.0
+mouse_filter = 2
 
 [node name="Patterns" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
 margin_right = 496.0
