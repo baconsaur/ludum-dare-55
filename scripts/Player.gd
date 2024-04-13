@@ -1,7 +1,8 @@
 extends Area2D
 
+signal initialized
 signal hit
-signal inventory_change
+signal mana_change
 
 export var speed : float = 200
 export var hit_radius : float = 3
@@ -13,8 +14,11 @@ var bullet_scene = preload("res://scenes/PlayerBullet.tscn")
 var current_hp = max_hp
 var can_fire = true
 var can_be_hit = true
-var inventory = 0
+var mana = 0
 
+
+func _ready():
+	emit_signal("initialized", 0, 0)
 
 func _process(delta):
 	if Input.is_action_pressed('up'):
@@ -26,14 +30,15 @@ func _process(delta):
 	if Input.is_action_pressed('left'):
 		position.x -= delta * speed
 
+func _unhandled_input(event):
 	if Input.is_action_pressed("fire"):
 		fire()
 
 func fire():
-	if not can_fire or inventory <= 0:
+	if not can_fire or mana <= 0:
 		return
-	inventory -= 1
-	emit_signal("inventory_change", inventory)
+	mana -= 1
+	emit_signal("mana_change", mana)
 	
 	var bullet = bullet_scene.instance()
 	bullet.add_to_group("player")
@@ -63,8 +68,8 @@ func take_hit(bullet):
 	bullet.queue_free()
 
 func collect(bullet):
-	inventory += 1
-	emit_signal("inventory_change", inventory)
+	mana += 1
+	emit_signal("mana_change", mana)
 	
 	bullet.queue_free()
 	
@@ -84,3 +89,7 @@ func set_cooldown(cooldown_time, callback):
 	timer.one_shot = true
 	timer.start()
 	timer.connect("timeout", self, callback, [timer])
+
+func pay_cost(cost):
+	mana -= cost
+	emit_signal("mana_change", mana)

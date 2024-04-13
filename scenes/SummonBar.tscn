@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/StatusBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/SummonBar.gd" type="Script" id=2]
+
+[node name="SummonBar" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -21.0
+margin_top = 0.0
+margin_right = 21.0
+margin_bottom = 6.0
+size_flags_horizontal = 1
+value = 0.0
+tint_over = Color( 0.584314, 0.517647, 0.305882, 1 )
+tint_progress = Color( 1, 0.854902, 0.466667, 1 )
+script = ExtResource( 2 )

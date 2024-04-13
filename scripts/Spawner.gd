@@ -1,3 +1,4 @@
+class_name Spawner
 extends Node2D
 
 export var bullet_type : PackedScene
@@ -39,7 +40,7 @@ func _process(delta):
 func fire():
 	for spawn in rotator.get_children():
 		var bullet
-		if count_since_collectible >= collectible_frequency:
+		if collectible_frequency and count_since_collectible >= collectible_frequency:
 			count_since_collectible = 0
 			bullet = collectible_type.instance()
 		else:
@@ -50,10 +51,16 @@ func fire():
 		bullet.rotation = spawn.global_rotation
 
 func set_pattern(pattern_data):
-	rotation_speed = pattern_data["rotation_speed"]
-	fire_rate = pattern_data["fire_rate"]
-	spawn_points = pattern_data["spawn_points"]
-	collectible_frequency = pattern_data["collectible_frequency"]
+	if "bullet_scene" in pattern_data:
+		bullet_type = load(pattern_data["bullet_scene"])
+	if "rotation_speed" in pattern_data:
+		rotation_speed = pattern_data["rotation_speed"]
+	if "fire_rate" in pattern_data:
+		fire_rate = pattern_data["fire_rate"]
+	if "spawn_points" in pattern_data:
+		spawn_points = pattern_data["spawn_points"]
+	if "collectible_frequency" in pattern_data:
+		collectible_frequency = pattern_data["collectible_frequency"]
 	initialize()
 
 

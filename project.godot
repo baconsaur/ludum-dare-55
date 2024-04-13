@@ -10,12 +10,42 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://scripts/Boss.gd"
+}, {
+"base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://scripts/BulletBase.gd"
+}, {
+"base": "Summon",
+"class": "DestructibleSummon",
+"language": "GDScript",
+"path": "res://scripts/DestructibleSummon.gd"
+}, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://scripts/Spawner.gd"
+}, {
+"base": "Area2D",
+"class": "Summon",
+"language": "GDScript",
+"path": "res://scripts/BaseSummon.gd"
+}, {
+"base": "DestructibleSummon",
+"class": "Turret",
+"language": "GDScript",
+"path": "res://scripts/Turret.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"Boss": "",
+"Bullet": "",
+"DestructibleSummon": "",
+"Spawner": "",
+"Summon": "",
+"Turret": ""
 }
 
 [application]
@@ -30,6 +60,7 @@ config/icon="res://icon.png"
 [autoload]
 
 IntegerResolutionHandler="*res://addons/integer_resolution_handler/integer_resolution_handler.gd"
+Globals="*res://scenes/Globals.tscn"
 
 [display]
 
@@ -82,6 +113,7 @@ right={
 fire={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
