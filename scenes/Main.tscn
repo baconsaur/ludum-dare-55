@@ -1,18 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/GameController.gd" type="Script" id=4]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 4 )
 
-[node name="Spawner" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -60 )
+[node name="Boss" parent="." instance=ExtResource( 1 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="UI" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 8
@@ -20,39 +24,69 @@ custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="Debug" type="VBoxContainer" parent="CanvasLayer/UI"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 504.0
-margin_bottom = 28.0
+margin_bottom = 280.0
+
+[node name="Patterns" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
+margin_right = 496.0
+margin_bottom = 20.0
 size_flags_vertical = 0
 alignment = 1
 
-[node name="Pattern1" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="Pattern1" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
 margin_left = 102.0
 margin_right = 172.0
 margin_bottom = 20.0
 text = "Pattern 1"
 
-[node name="Pattern2" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="Pattern2" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
 margin_left = 176.0
 margin_right = 246.0
 margin_bottom = 20.0
 text = "Pattern 2"
 
-[node name="Pattern3" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="Pattern3" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
 margin_left = 250.0
 margin_right = 320.0
 margin_bottom = 20.0
 text = "Pattern 3"
 
-[node name="Pattern4" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="Pattern4" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
 margin_left = 324.0
 margin_right = 394.0
 margin_bottom = 20.0
 text = "Pattern 4"
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern1" to="Spawner" method="_on_Pattern1_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern2" to="Spawner" method="_on_Pattern2_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern3" to="Spawner" method="_on_Pattern3_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern4" to="Spawner" method="_on_Pattern4_pressed"]
+[node name="PlayerStats" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
+margin_top = 24.0
+margin_right = 496.0
+margin_bottom = 38.0
+
+[node name="HP" type="Label" parent="CanvasLayer/UI/Debug/PlayerStats"]
+margin_right = 34.0
+margin_bottom = 14.0
+text = "HP: 0"
+
+[node name="Inventory" type="Label" parent="CanvasLayer/UI/Debug/PlayerStats"]
+margin_left = 38.0
+margin_right = 97.0
+margin_bottom = 14.0
+text = "Ammo: 0"
+
+[node name="BossStats" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
+margin_top = 42.0
+margin_right = 496.0
+margin_bottom = 56.0
+
+[node name="HP" type="Label" parent="CanvasLayer/UI/Debug/BossStats"]
+margin_right = 34.0
+margin_bottom = 14.0
+text = "HP: 0"
+
+[connection signal="pressed" from="CanvasLayer/UI/Debug/Patterns/Pattern1" to="Boss" method="_on_Pattern1_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Debug/Patterns/Pattern2" to="Boss" method="_on_Pattern2_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Debug/Patterns/Pattern3" to="Boss" method="_on_Pattern3_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Debug/Patterns/Pattern4" to="Boss" method="_on_Pattern4_pressed"]

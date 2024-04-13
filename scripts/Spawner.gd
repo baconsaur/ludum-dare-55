@@ -1,10 +1,14 @@
 extends Node2D
 
 export var bullet_type : PackedScene
+export var collectible_type : PackedScene
 export var rotation_speed : float = 80
 export var fire_rate : float = 0.2
 export var spawn_points : int = 3
 export var spawn_radius : float = 10
+export var collectible_frequency : float = 0.1  #TODO make this more flexible
+
+var count_since_collectible = 0
 
 onready var fire_timer = $FireTimer
 onready var rotator = $Rotator
@@ -34,38 +38,24 @@ func _process(delta):
 
 func fire():
 	for spawn in rotator.get_children():
-		var bullet = bullet_type.instance()
+		var bullet
+		if count_since_collectible >= collectible_frequency:
+			count_since_collectible = 0
+			bullet = collectible_type.instance()
+		else:
+			count_since_collectible += 1
+			bullet = bullet_type.instance()
 		get_tree().root.add_child(bullet)
 		bullet.position = spawn.global_position
 		bullet.rotation = spawn.global_rotation
 
+func set_pattern(pattern_data):
+	rotation_speed = pattern_data["rotation_speed"]
+	fire_rate = pattern_data["fire_rate"]
+	spawn_points = pattern_data["spawn_points"]
+	collectible_frequency = pattern_data["collectible_frequency"]
+	initialize()
+
 
 func _on_FireTimer_timeout():
 	fire()
-
-
-func _on_Pattern1_pressed():
-	rotation_speed = 80
-	fire_rate = 0.2
-	spawn_points = 3
-	initialize()
-
-func _on_Pattern2_pressed():
-	rotation_speed = 0
-	fire_rate = 0.1
-	spawn_points = 8
-	initialize()
-
-
-func _on_Pattern3_pressed():
-	rotation_speed = 50
-	fire_rate = 0.2
-	spawn_points = 6
-	initialize()
-
-
-func _on_Pattern4_pressed():
-	rotation_speed = 150
-	fire_rate = 0.15
-	spawn_points = 4
-	initialize()
