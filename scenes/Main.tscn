@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=1]
+
+[node name="Main" type="Node2D"]
+
+[node name="Spawner" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -60 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 504.0
+margin_bottom = 28.0
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Pattern1" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 102.0
+margin_right = 172.0
+margin_bottom = 20.0
+text = "Pattern 1"
+
+[node name="Pattern2" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 176.0
+margin_right = 246.0
+margin_bottom = 20.0
+text = "Pattern 2"
+
+[node name="Pattern3" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 250.0
+margin_right = 320.0
+margin_bottom = 20.0
+text = "Pattern 3"
+
+[node name="Pattern4" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 324.0
+margin_right = 394.0
+margin_bottom = 20.0
+text = "Pattern 4"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern1" to="Spawner" method="_on_Pattern1_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern2" to="Spawner" method="_on_Pattern2_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern3" to="Spawner" method="_on_Pattern3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/Pattern4" to="Spawner" method="_on_Pattern4_pressed"]
