@@ -4,4 +4,7 @@
 [ext_resource path="res://scripts/HealthBar.gd" type="Script" id=2]
 
 [node name="HealthBar" instance=ExtResource( 1 )]
+tint_under = Color( 0.223529, 0.168627, 0.207843, 1 )
+tint_over = Color( 0.733333, 0.278431, 0.309804, 1 )
+tint_progress = Color( 0.733333, 0.278431, 0.309804, 1 )
 script = ExtResource( 2 )

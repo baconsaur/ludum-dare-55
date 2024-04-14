@@ -1,9 +1,41 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Boss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/SummonBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -2, 1 ), Vector2( 1, -2 ), Vector2( -1, 1 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -15,6 +47,12 @@ position = Vector2( 0, 71 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 2 )
+anims/shake = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -35,6 +73,7 @@ margin_bottom = 280.0
 mouse_filter = 2
 
 [node name="Patterns" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
+visible = false
 margin_right = 496.0
 margin_bottom = 20.0
 size_flags_vertical = 0
@@ -65,9 +104,8 @@ margin_bottom = 20.0
 text = "Pattern 4"
 
 [node name="PlayerStats" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
-margin_top = 24.0
 margin_right = 496.0
-margin_bottom = 38.0
+margin_bottom = 14.0
 
 [node name="Inventory" type="Label" parent="CanvasLayer/UI/Debug/PlayerStats"]
 margin_right = 50.0

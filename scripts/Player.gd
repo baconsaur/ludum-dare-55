@@ -16,6 +16,9 @@ var can_fire = true
 var can_be_hit = true
 var mana = 0
 
+onready var mana_label = $HUD/Stats/Mana/ManaLabel
+onready var animation_player = $AnimationPlayer
+
 
 func _ready():
 	emit_signal("initialized", 0, 0)
@@ -38,7 +41,9 @@ func fire():
 	if not can_fire or mana <= 0:
 		return
 	mana -= 1
+	mana_label.text = str(mana)
 	emit_signal("mana_change", mana)
+	
 	
 	var bullet = bullet_scene.instance()
 	bullet.add_to_group("player")
@@ -59,7 +64,7 @@ func _on_Player_area_entered(area):
 		take_hit(area)
 
 func take_hit(bullet):
-	modulate = Color.red
+	animation_player.play("hit")
 	current_hp -= 1
 	emit_signal("hit", current_hp)
 	
@@ -69,13 +74,14 @@ func take_hit(bullet):
 
 func collect(bullet):
 	mana += 1
+	mana_label.text = str(mana)
 	emit_signal("mana_change", mana)
 	
 	bullet.queue_free()
 	
 func end_hit(timer):
 	can_be_hit = true
-	modulate = Color.white
+	animation_player.stop(true)
 	timer.queue_free()
 
 func enable_fire(timer):
@@ -92,4 +98,5 @@ func set_cooldown(cooldown_time, callback):
 
 func pay_cost(cost):
 	mana -= cost
+	mana_label.text = str(mana)
 	emit_signal("mana_change", mana)

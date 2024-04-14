@@ -9,6 +9,7 @@ onready var debug_summon_2 = $CanvasLayer/UI/Debug/Summons/Summon2/Button
 
 onready var player = $Player
 onready var boss = $Boss
+onready var camera = $Camera2D
 onready var summon_data = get_node("/root/Globals").summon_data
 onready var debug_buttons = {
 	1: debug_summon_1,
@@ -18,11 +19,13 @@ onready var debug_buttons = {
 func _ready():
 	update_hp(player.current_hp)
 	update_boss_hp(boss.current_hp)
-	player.connect("hit", self, "update_hp")
+	player.connect("hit", self, "update_hp", [true])
 	player.connect("mana_change", self, "update_mana")
 	boss.connect("hit", self, "update_boss_hp")
 
-func update_hp(current_hp):
+func update_hp(current_hp, hit=false):
+	if hit:
+		camera.shake()
 	if current_hp <= 0:
 		print("you died")
 

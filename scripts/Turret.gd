@@ -8,5 +8,5 @@ func initialize(init_data):
 	spawner.set_pattern(init_data["pattern"])
 	# Debug
 	if init_data["pattern"]["owner_group"] == "player":
-		sprite.modulate = Color.chartreuse
+		sprite.modulate = Color("#486b7f")
 	.initialize(init_data)
