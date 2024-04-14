@@ -61,6 +61,7 @@ config/icon="res://icon.png"
 
 IntegerResolutionHandler="*res://addons/integer_resolution_handler/integer_resolution_handler.gd"
 Globals="*res://scenes/Globals.tscn"
+TransitionManager="*res://scenes/TransitionManager.tscn"
 
 [display]
 

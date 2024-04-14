@@ -7,9 +7,11 @@ onready var sprite = $Sprite
 onready var collider = $CollisionShape2D
 
 
+func _ready():
+	sprite.global_rotation = 90
+
 func _process(delta):
 	position += transform.x * speed * delta
-	sprite.global_rotation = 0
 
 
 func _on_LifeTime_timeout():

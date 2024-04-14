@@ -9,8 +9,10 @@
 script = ExtResource( 3 )
 
 [node name="Spawner" parent="." index="0" instance=ExtResource( 2 )]
+spawn_radius = 15.0
 
 [node name="Sprite" parent="." index="1"]
 modulate = Color( 0.733333, 0.278431, 0.309804, 1 )
 
 [node name="SummonBar" parent="Control" index="1" instance=ExtResource( 4 )]
+mouse_filter = 1

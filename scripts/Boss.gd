@@ -30,16 +30,22 @@ func _process(_delta):
 	emit_signal("mana_change", max_mana - summon_timer.time_left)
 
 func take_hit(bullet):
+	bullet.queue_free()
 	current_hp -= 1
 	emit_signal("hit", current_hp)
-	bullet.queue_free()
+	if current_hp <= 0:
+		die()
+
+func die():
+	# TODO dramatic death animation
+	queue_free()
 
 func summon_turret():
 	for spawn in turret_spawns.get_children():
 		if not turrets[spawn]:
 			var turret : Turret = turret_scene.instance()
 			turrets[spawn] = turret
-			get_tree().root.add_child(turret)
+			get_tree().current_scene.add_child(turret)
 			turret.position = spawn.global_position
 			turret.initialize({
 				"life_time": max_mana,
@@ -53,10 +59,9 @@ func summon_turret():
 func clear_turret_spawn(spawn):
 	turrets[spawn] = null
 
-func _on_Boss_area_entered(area):
-	if not area.is_in_group("player"):
-		return
-	take_hit(area)
+func _on_Boss_area_entered(area : Area2D):
+	if area.is_in_group("bullet") and area.is_in_group("player"):
+		take_hit(area)
 
 func _on_Pattern1_pressed():
 	spawner.set_pattern(patterns[1])

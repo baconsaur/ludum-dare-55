@@ -1,5 +1,9 @@
 extends Node
 
+export var boss_queue : Array
+
+var boss_index = 0
+
 var enemy_fire_patterns = {
 		1: {
 		"rotation_speed": 80,
@@ -38,8 +42,8 @@ var enemy_fire_patterns = {
 var player_fire_patterns = {
 	1: {
 		"rotation_speed": 120,
-		"fire_rate": 0.25,
-		"spawn_points": 2,
+		"fire_rate": 0.2,
+		"spawn_points": 3,
 		"collectible_frequency": 0,
 		"owner_group": "player",
 		"bullet_scene": "res://scenes/PlayerBullet.tscn",
@@ -76,3 +80,13 @@ var summon_data = {
 		},
 	},
 }
+
+func get_boss():
+	if boss_index >= boss_queue.size():
+		boss_index = 0
+	var next_boss = boss_queue[boss_index]
+	boss_index += 1
+	return next_boss
+
+func reset_boss_queue():
+	boss_index = 0
