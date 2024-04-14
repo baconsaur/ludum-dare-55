@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://materials/glow.gdshader" type="Shader" id=1]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/outline_col = Color( 0.780392, 0.862745, 0.815686, 1 )
+shader_param/outline_on = true

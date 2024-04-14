@@ -8,15 +8,17 @@ var enemy_fire_patterns = {
 		1: {
 		"rotation_speed": 80,
 		"fire_rate": 0.2,
+		"bullet_speed": 100,
 		"spawn_points": 3,
 		"collectible_frequency": 3,
 		"owner_group": "boss",
 		"bullet_scene": "res://scenes/BossBullet.tscn",
 	},
 	2: {
-		"rotation_speed": 0,
+		"rotation_speed": 15,
 		"fire_rate": 0.5,
-		"spawn_points": 16,
+		"bullet_speed": 70,
+		"spawn_points": 4,
 		"collectible_frequency": 4,
 		"owner_group": "boss",
 		"bullet_scene": "res://scenes/BossBullet.tscn",
@@ -24,6 +26,7 @@ var enemy_fire_patterns = {
 	3: {
 		"rotation_speed": 50,
 		"fire_rate": 0.2,
+		"bullet_speed": 100,
 		"spawn_points": 6,
 		"collectible_frequency": 3,
 		"owner_group": "boss",
@@ -32,6 +35,7 @@ var enemy_fire_patterns = {
 	4: {
 		"rotation_speed": 150,
 		"fire_rate": 0.15,
+		"bullet_speed": 100,
 		"spawn_points": 4,
 		"collectible_frequency": 8,
 		"owner_group": "boss",

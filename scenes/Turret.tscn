@@ -1,11 +1,44 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/DestructibleSummon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Turret.gd" type="Script" id=3]
 [ext_resource path="res://scenes/SummonBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/turret0.png" type="Texture" id=5]
 
-[node name="Turret" instance=ExtResource( 1 )]
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[node name="BaseTurret" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="Spawner" parent="." index="0" instance=ExtResource( 2 )]
@@ -13,6 +46,14 @@ spawn_radius = 15.0
 
 [node name="Sprite" parent="." index="1"]
 modulate = Color( 0.733333, 0.278431, 0.309804, 1 )
+z_index = -1
+texture = ExtResource( 5 )
+hframes = 8
 
 [node name="SummonBar" parent="Control" index="1" instance=ExtResource( 4 )]
 mouse_filter = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "idle"
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 1 )

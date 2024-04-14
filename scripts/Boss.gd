@@ -7,8 +7,10 @@ signal mana_change
 
 export var turret_scene : PackedScene
 export var max_hp = 50
-export var max_mana = 30
+export var max_mana = 15
 export var turret_hp = 5
+export var pattern = 1
+export var turret_pattern = 1
 
 var current_hp = max_hp
 var turrets = {}
@@ -19,7 +21,6 @@ onready var turret_spawns = $TurretSpawns
 onready var patterns = get_node("/root/Globals").enemy_fire_patterns
 
 func _ready():
-	randomize()
 	for turret in turret_spawns.get_children():
 		turrets[turret] = null
 	summon_timer.wait_time = max_mana
@@ -49,7 +50,7 @@ func summon_turret():
 			turret.position = spawn.global_position
 			turret.initialize({
 				"life_time": max_mana,
-				"pattern": patterns.values()[randi() % patterns.size()],
+				"pattern": patterns[turret_pattern],
 				"max_hp": turret_hp,
 				"weakness_group": "player",
 			})

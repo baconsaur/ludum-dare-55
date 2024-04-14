@@ -5,6 +5,7 @@ export var bullet_type : PackedScene
 export var collectible_type : PackedScene
 export var rotation_speed : float = 80
 export var fire_rate : float = 0.2
+export var bullet_speed : float = 100
 export var spawn_points : int = 3
 export var spawn_radius : float = 10
 export var collectible_frequency : float = 0.1  #TODO make this more flexible
@@ -41,7 +42,7 @@ func _process(delta):
 
 func fire():
 	for spawn in rotator.get_children():
-		var bullet
+		var bullet : Bullet
 		if collectible_frequency and count_since_collectible >= collectible_frequency:
 			count_since_collectible = 0
 			bullet = collectible_type.instance()
@@ -49,6 +50,7 @@ func fire():
 			count_since_collectible += 1
 			bullet = bullet_type.instance()
 		get_tree().current_scene.add_child(bullet)
+		bullet.speed = bullet_speed
 		bullet.position = spawn.global_position
 		bullet.rotation = spawn.global_rotation
 
@@ -63,6 +65,8 @@ func set_pattern(pattern_data):
 		spawn_points = pattern_data["spawn_points"]
 	if "collectible_frequency" in pattern_data:
 		collectible_frequency = pattern_data["collectible_frequency"]
+	if "bullet_speed" in pattern_data:
+		bullet_speed = pattern_data["bullet_speed"]
 	initialize()
 
 

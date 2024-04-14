@@ -18,6 +18,7 @@ var mana = 0
 var is_dead = false
 var overlapping_danger = false
 
+onready var mana_particles = $ManaParticles
 onready var mana_label = $HUD/Stats/Mana/ManaLabel
 onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
@@ -60,7 +61,7 @@ func fire():
 	get_tree().current_scene.add_child(bullet)
 	bullet.position = global_position
 	bullet.rotation = get_angle_to(get_global_mouse_position())
-	
+	bullet.sprite.modulate = sprite.modulate
 	can_fire = false
 	set_cooldown(fire_cooldown, "enable_fire")
 
@@ -89,6 +90,7 @@ func collect(bullet):
 	mana += 1
 	mana_label.text = str(mana)
 	emit_signal("mana_change", mana)
+	mana_particles.emitting = true
 	
 	bullet.queue_free()
 	

@@ -11,7 +11,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.025
 
-[node name="Boss" type="Area2D" groups=["boss"]]
+[node name="BaseBoss" type="Area2D" groups=["boss"]]
 position = Vector2( 0, -60 )
 script = ExtResource( 6 )
 turret_scene = ExtResource( 5 )
@@ -32,18 +32,6 @@ bullet_type = ExtResource( 8 )
 spawn_radius = 30.0
 
 [node name="TurretSpawns" type="Node" parent="."]
-
-[node name="TurretSpawn" type="Node2D" parent="TurretSpawns"]
-position = Vector2( -182, 0 )
-
-[node name="TurretSpawn2" type="Node2D" parent="TurretSpawns"]
-position = Vector2( 184, 0 )
-
-[node name="TurretSpawn3" type="Node2D" parent="TurretSpawns"]
-position = Vector2( -128, 96 )
-
-[node name="TurretSpawn4" type="Node2D" parent="TurretSpawns"]
-position = Vector2( 128, 96 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = -54.0
