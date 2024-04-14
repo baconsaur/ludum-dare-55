@@ -6,7 +6,7 @@ signal hit
 export var max_hp = 5
 export var weakness_group = "player"
 
-var current_hp = max_hp
+onready var current_hp = max_hp
 
 
 func _on_DestructibleSummon_area_entered(area):

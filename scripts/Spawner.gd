@@ -8,7 +8,7 @@ export var fire_rate : float = 0.2
 export var bullet_speed : float = 100
 export var spawn_points : int = 3
 export var spawn_radius : float = 10
-export var collectible_frequency : float = 0.1  #TODO make this more flexible
+export var collectible_frequency : int = 0  #TODO make this more flexible
 export var start_delay : float = 1
 var count_since_collectible = 0
 

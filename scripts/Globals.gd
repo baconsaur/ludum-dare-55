@@ -3,61 +3,19 @@ extends Node
 export var boss_queue : Array
 
 var boss_index = 0
-
-var enemy_fire_patterns = {
-		1: {
-		"rotation_speed": 80,
-		"fire_rate": 0.2,
-		"bullet_speed": 100,
-		"spawn_points": 3,
-		"collectible_frequency": 3,
-		"owner_group": "boss",
-		"bullet_scene": "res://scenes/BossBullet.tscn",
-	},
-	2: {
-		"rotation_speed": 15,
-		"fire_rate": 0.5,
-		"bullet_speed": 70,
-		"spawn_points": 4,
-		"collectible_frequency": 4,
-		"owner_group": "boss",
-		"bullet_scene": "res://scenes/BossBullet.tscn",
-	},
-	3: {
-		"rotation_speed": 50,
-		"fire_rate": 0.2,
-		"bullet_speed": 100,
-		"spawn_points": 6,
-		"collectible_frequency": 3,
-		"owner_group": "boss",
-		"bullet_scene": "res://scenes/BossBullet.tscn",
-	},
-	4: {
-		"rotation_speed": 150,
-		"fire_rate": 0.15,
-		"bullet_speed": 100,
-		"spawn_points": 4,
-		"collectible_frequency": 8,
-		"owner_group": "boss",
-		"bullet_scene": "res://scenes/BossBullet.tscn",
-	},
-}
+var player_summons = []
 
 var player_fire_patterns = {
 	1: {
 		"rotation_speed": 120,
 		"fire_rate": 0.2,
 		"spawn_points": 3,
-		"collectible_frequency": 0,
-		"owner_group": "player",
 		"bullet_scene": "res://scenes/PlayerBullet.tscn",
 	},
 	2: {
 		"rotation_speed": 120,
 		"fire_rate": 0.15,
 		"spawn_points": 4,
-		"collectible_frequency": 0,
-		"owner_group": "player",
 		"bullet_scene": "res://scenes/PlayerBullet.tscn",
 	}
 }
@@ -92,5 +50,5 @@ func get_boss():
 	boss_index += 1
 	return next_boss
 
-func reset_boss_queue():
+func reset():
 	boss_index = 0

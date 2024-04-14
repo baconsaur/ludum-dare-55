@@ -63,91 +63,32 @@ custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
-[node name="Debug" type="VBoxContainer" parent="CanvasLayer/UI"]
+[node name="Summons" type="HBoxContainer" parent="CanvasLayer/UI"]
 margin_left = 8.0
-margin_top = 8.0
+margin_top = 250.0
 margin_right = 504.0
 margin_bottom = 280.0
-mouse_filter = 2
-
-[node name="Patterns" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
-visible = false
-margin_right = 496.0
-margin_bottom = 20.0
-size_flags_vertical = 0
-alignment = 1
-
-[node name="Pattern1" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
-margin_left = 102.0
-margin_right = 172.0
-margin_bottom = 20.0
-text = "Pattern 1"
-
-[node name="Pattern2" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
-margin_left = 176.0
-margin_right = 246.0
-margin_bottom = 20.0
-text = "Pattern 2"
-
-[node name="Pattern3" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
-margin_left = 250.0
-margin_right = 320.0
-margin_bottom = 20.0
-text = "Pattern 3"
-
-[node name="Pattern4" type="Button" parent="CanvasLayer/UI/Debug/Patterns"]
-margin_left = 324.0
-margin_right = 394.0
-margin_bottom = 20.0
-text = "Pattern 4"
-
-[node name="Summons" type="HBoxContainer" parent="CanvasLayer/UI/Debug"]
-margin_top = 242.0
-margin_right = 496.0
-margin_bottom = 272.0
 size_flags_vertical = 10
 alignment = 1
 
-[node name="Summon1" type="VBoxContainer" parent="CanvasLayer/UI/Debug/Summons"]
-margin_left = 165.0
-margin_right = 246.0
+[node name="SummonCard" type="VBoxContainer" parent="CanvasLayer/UI/Summons"]
+margin_left = 207.0
+margin_right = 288.0
 margin_bottom = 30.0
 
-[node name="SummonBar" parent="CanvasLayer/UI/Debug/Summons/Summon1" instance=ExtResource( 3 )]
+[node name="SummonBar" parent="CanvasLayer/UI/Summons/SummonCard" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_right = 0.0
 margin_left = 0.0
 margin_right = 81.0
 mouse_filter = 1
-target_path = NodePath("../../../../../../Player")
+target_path = NodePath("../../../../../Player")
 
-[node name="Button" type="Button" parent="CanvasLayer/UI/Debug/Summons/Summon1"]
+[node name="Button" type="Button" parent="CanvasLayer/UI/Summons/SummonCard"]
 margin_top = 10.0
 margin_right = 81.0
 margin_bottom = 30.0
 disabled = true
 text = "Summon 1"
 
-[node name="Summon2" type="VBoxContainer" parent="CanvasLayer/UI/Debug/Summons"]
-margin_left = 250.0
-margin_right = 331.0
-margin_bottom = 30.0
-
-[node name="SummonBar" parent="CanvasLayer/UI/Debug/Summons/Summon2" instance=ExtResource( 3 )]
-anchor_left = 0.0
-anchor_right = 0.0
-margin_left = 0.0
-margin_right = 81.0
-mouse_filter = 1
-target_path = NodePath("../../../../../../Player")
-summon_id = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/UI/Debug/Summons/Summon2"]
-margin_top = 10.0
-margin_right = 81.0
-margin_bottom = 30.0
-disabled = true
-text = "Summon 2"
-
-[connection signal="pressed" from="CanvasLayer/UI/Debug/Summons/Summon1/Button" to="." method="_on_Summon1_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/Debug/Summons/Summon2/Button" to="." method="_on_Summon2_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Summons/SummonCard/Button" to="." method="_on_Summon1_pressed"]

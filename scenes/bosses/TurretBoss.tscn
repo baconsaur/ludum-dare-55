@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/BaseBoss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/TurretBoss.gd" type="Script" id=2]
+[ext_resource path="res://scenes/BossTurret.tscn" type="PackedScene" id=3]
 
-[node name="Boss1" instance=ExtResource( 1 )]
-turret_pattern = 2
+[node name="TurretBoss" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+turret_scene = ExtResource( 3 )
+turret_hp = 5
+turret_life = 30
 
 [node name="Node2D" type="Node2D" parent="TurretSpawns" index="0"]
 position = Vector2( -128, -48 )

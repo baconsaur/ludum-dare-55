@@ -45,7 +45,6 @@ script = ExtResource( 3 )
 spawn_radius = 15.0
 
 [node name="Sprite" parent="." index="1"]
-modulate = Color( 0.733333, 0.278431, 0.309804, 1 )
 z_index = -1
 texture = ExtResource( 5 )
 hframes = 8

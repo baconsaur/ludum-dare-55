@@ -7,5 +7,5 @@ func _ready():
 	get_tree().paused = true
 
 func _on_Button_pressed():
-	Globals.reset_boss_queue()
+	Globals.reset()
 	TransitionManager.transition_to(game_scene)
