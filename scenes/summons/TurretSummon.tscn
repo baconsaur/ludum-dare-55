@@ -1,0 +1,182 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/BaseSummon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Turret.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/PlayerBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/TurretSummon.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[node name="TurretSummon" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+target = "world"
+
+[node name="BaseTurret" parent="." index="0" instance=ExtResource( 2 )]
+position = Vector2( 0, 16 )
+max_mana = 30.0
+max_hp = 12
+weakness_group = "boss"
+
+[node name="Spawner" parent="BaseTurret" index="0"]
+bullet_type = ExtResource( 3 )
+rotation_speed = 15.0
+fire_rate = 0.5
+bullet_speed = 50.0
+spawn_points = 4
+start_delay = 0.5
+
+[node name="Sprite" parent="BaseTurret" index="1"]
+self_modulate = Color( 0.282353, 0.419608, 0.498039, 1 )
+
+[node name="SummonBar" parent="BaseTurret/Control" index="1"]
+visible = false
+
+[node name="AnimationPlayer" parent="BaseTurret" index="4"]
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 2 )
+
+[node name="BaseTurret2" parent="." index="1" instance=ExtResource( 2 )]
+position = Vector2( -128, -64 )
+max_mana = 30.0
+max_hp = 12
+weakness_group = "boss"
+
+[node name="Spawner" parent="BaseTurret2" index="0"]
+bullet_type = ExtResource( 3 )
+rotation_speed = 15.0
+fire_rate = 0.5
+bullet_speed = 50.0
+spawn_points = 4
+start_delay = 0.5
+
+[node name="Sprite" parent="BaseTurret2" index="1"]
+self_modulate = Color( 0.282353, 0.419608, 0.498039, 1 )
+
+[node name="SummonBar" parent="BaseTurret2/Control" index="1"]
+visible = false
+
+[node name="AnimationPlayer" parent="BaseTurret2" index="4"]
+anims/RESET = SubResource( 3 )
+anims/idle = SubResource( 4 )
+
+[node name="BaseTurret3" parent="." index="2" instance=ExtResource( 2 )]
+position = Vector2( 128, -64 )
+max_mana = 30.0
+max_hp = 12
+weakness_group = "boss"
+
+[node name="Spawner" parent="BaseTurret3" index="0"]
+bullet_type = ExtResource( 3 )
+rotation_speed = 15.0
+fire_rate = 0.5
+bullet_speed = 50.0
+spawn_points = 4
+start_delay = 0.5
+
+[node name="Sprite" parent="BaseTurret3" index="1"]
+self_modulate = Color( 0.282353, 0.419608, 0.498039, 1 )
+
+[node name="SummonBar" parent="BaseTurret3/Control" index="1"]
+visible = false
+
+[node name="AnimationPlayer" parent="BaseTurret3" index="4"]
+anims/RESET = SubResource( 5 )
+anims/idle = SubResource( 6 )
+
+[editable path="BaseTurret"]
+[editable path="BaseTurret2"]
+[editable path="BaseTurret3"]

@@ -1,9 +1,8 @@
 extends Node
 
 export var boss_queue : Array
-
-var boss_index = 0
-var player_summons = []
+export var player_summons : Array
+export var boss_index = 0
 
 var player_fire_patterns = {
 	1: {

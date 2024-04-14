@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/BaseBoss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/ShieldBoss.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Shield.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/summons/ShieldCard.tscn" type="PackedScene" id=4]
 
 [node name="ShieldBoss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 max_hp = 75
+max_mana = 16
 pattern = 3
+summon_card = ExtResource( 4 )
+shield_scene = ExtResource( 3 )
+shield_life = 8.0
+
+[node name="SummonTimer" parent="." index="2"]
+one_shot = true

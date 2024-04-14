@@ -8,6 +8,7 @@ signal mana_change
 export var max_hp = 50
 export var max_mana = 15
 export var pattern = 1
+export var summon_card : PackedScene
 
 var boss_pattern = {}
 
@@ -22,6 +23,8 @@ func _ready():
 	emit_signal("initialized", 0, max_mana)
 
 func _process(_delta):
+	if summon_timer.is_stopped():
+		return
 	emit_signal("mana_change", max_mana - summon_timer.time_left)
 
 func summon():
@@ -35,6 +38,8 @@ func take_hit(bullet):
 		die()
 
 func die():
+	if summon_card:
+		Globals.player_summons.append(summon_card)
 	# TODO dramatic death animation
 	queue_free()
 

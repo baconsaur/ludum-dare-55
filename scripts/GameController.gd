@@ -1,16 +1,15 @@
 extends Node2D
 
-var summon_active = false
+export var summon_cooldown : float = 5
 
 var game_over_menu = preload("res://scenes/GameOver.tscn")
 var level_complete_menu = preload("res://scenes/LevelComplete.tscn")
 var boss : Boss
 
-onready var summon_cards = $CanvasLayer/UI/Summons
-
 onready var player = $Player
 onready var camera = $Camera2D
 onready var ui = $CanvasLayer/UI
+onready var summon_cards = $CanvasLayer/UI/SummonContainer/Summons
 onready var summon_data = Globals.summon_data
 
 
@@ -24,6 +23,25 @@ func _ready():
 	player.connect("hit", self, "update_hp", [true])
 	player.connect("mana_change", self, "update_mana")
 	boss.connect("hit", self, "update_boss_hp")
+	
+	populate_summon_cards()
+
+func populate_summon_cards():
+	for summon in Globals.player_summons:
+		var card = summon.instance()
+		summon_cards.add_child(card)
+		card.connect("activated_summon", self, "activate_summon")
+
+func activate_summon(cost, summon_obj):
+	for card in summon_cards.get_children():
+		card.set_cooldown(true)
+	var summon = summon_obj.instance()
+	if summon.target == "player":
+		player.add_child(summon)
+	else:
+		add_child(summon)
+	summon.connect("despawn", self, "despawn")
+	player.pay_cost(cost)
 
 func update_hp(current_hp, hit=false):
 	if hit:
@@ -46,27 +64,28 @@ func update_boss_hp(current_hp):
 		set_timer(0.5, "next_level")
 
 func update_mana(current_mana):
-	pass
-#	for summon in summon_data:
-#		if summon_active or current_mana < summon_data[summon]["cost"]:
-#			debug_buttons[summon].disabled = true
-#		else:
-#			debug_buttons[summon].disabled = false
+	for card in summon_cards.get_children():
+		card.update_mana(current_mana)
 
-func spawn(summon_data):
-	var summon : Summon = load(summon_data["scene"]).instance()
-	add_child(summon)
-	if "spawn_location" in summon_data:
-		summon.position = summon_data["spawn_location"]
-	else:
-		summon.position = player.global_position
-	summon.initialize(summon_data["init_data"])
-	summon_active = true
-	summon.connect("despawn", self, "despawn")
+#func spawn(summon_data):
+#	var summon : Summon = load(summon_data["scene"]).instance()
+#	add_child(summon)
+#	if "spawn_location" in summon_data:
+#		summon.position = summon_data["spawn_location"]
+#	else:
+#		summon.position = player.global_position
+#	summon.initialize(summon_data["init_data"])
+#	summon_active = true
+#	summon.connect("despawn", self, "despawn")
 
 func despawn():
-	summon_active = false
-	update_mana(player.mana)
+	set_timer(summon_cooldown, "end_summon_cooldown")
+
+func end_summon_cooldown(timer):
+	for card in summon_cards.get_children():
+		card.set_cooldown(false)
+		card.update_mana(player.mana)
+	timer.queue_free()
 
 func set_timer(duration, callback):
 	var timer := Timer.new()
