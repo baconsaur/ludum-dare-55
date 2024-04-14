@@ -16,19 +16,25 @@ var turret_pattern = {
 
 onready var turret_spawns = $TurretSpawns
 
-func _ready():
-	boss_pattern = {
+func prepare():
+	boss_patterns = [{
 		"rotation_speed": 80,
-		"fire_rate": 0.2,
-		"bullet_speed": 100,
+		"fire_rate": 0.3,
+		"bullet_speed": 80,
 		"spawn_points": 3,
 		"collectible_frequency": 2,
 		"bullet_scene": "res://scenes/BossBullet.tscn",
-	}
-
+	},{
+		"rotation_speed": -100,
+		"fire_rate": 0.2,
+		"bullet_speed": 100,
+		"spawn_points": 3,
+		"collectible_frequency": 1.5,
+		"bullet_scene": "res://scenes/BossBullet.tscn",
+	}]
 	for turret in turret_spawns.get_children():
 		turrets[turret] = null
-	._ready()
+	.prepare()
 
 func summon():
 	for spawn in turret_spawns.get_children():

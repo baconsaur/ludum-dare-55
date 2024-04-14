@@ -8,6 +8,6 @@ func _ready():
 func update_mana(current_mana):
 	value = current_mana
 
-func set_init(init_mana, init_max_mana):
+func set_init(init_mana, init_max_mana, segments=1):
 	value = init_mana
 	max_value = init_max_mana

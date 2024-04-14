@@ -10,6 +10,7 @@ export var spawn_points : int = 3
 export var spawn_radius : float = 10
 export var collectible_frequency : int = 0  #TODO make this more flexible
 export var start_delay : float = 1
+export var change_delay : float = 1
 var count_since_collectible = 0
 
 onready var fire_timer = $FireTimer
@@ -54,7 +55,7 @@ func fire():
 		bullet.position = spawn.global_position
 		bullet.rotation = spawn.global_rotation
 
-func set_pattern(pattern_data):
+func set_pattern(pattern_data, init=true):
 	if "bullet_scene" in pattern_data:
 		bullet_type = load(pattern_data["bullet_scene"])
 	if "rotation_speed" in pattern_data:
@@ -67,8 +68,14 @@ func set_pattern(pattern_data):
 		collectible_frequency = pattern_data["collectible_frequency"]
 	if "bullet_speed" in pattern_data:
 		bullet_speed = pattern_data["bullet_speed"]
-	initialize()
+	if init:
+		initialize()
 
+func reset(pattern_data):
+	for spawn in rotator.get_children():
+		spawn.queue_free()
+	set_pattern(pattern_data, false)
+	set_timer(change_delay, "initialize")
 
 func _on_FireTimer_timeout():
 	fire()

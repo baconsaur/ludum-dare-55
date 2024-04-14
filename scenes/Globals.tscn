@@ -7,3 +7,4 @@
 [node name="Globals" type="Node"]
 script = ExtResource( 1 )
 boss_queue = [ ExtResource( 2 ), ExtResource( 3 ) ]
+hp_color_segment = [ Color( 0.733333, 0.278431, 0.309804, 1 ), Color( 0.839216, 0.345098, 0.509804, 1 ), Color( 0.86, 0.4042, 0.670083, 1 ), Color( 0.823529, 0.4, 0.870588, 1 ), Color( 0.60452, 0.3528, 0.84, 1 ) ]

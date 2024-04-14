@@ -4,6 +4,7 @@ signal initialized
 signal hit
 signal mana_change
 
+export var start_mana = 25 # Debug
 export var speed : float = 200
 export var hit_radius : float = 3
 export var hit_time : float = 1
@@ -14,7 +15,7 @@ var bullet_scene = preload("res://scenes/PlayerBullet.tscn")
 var current_hp = max_hp
 var can_fire = true
 var can_be_hit = true
-var mana = 0
+var mana = start_mana
 var is_dead = false
 var overlapping_danger = false
 

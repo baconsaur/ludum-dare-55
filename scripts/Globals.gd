@@ -3,6 +3,7 @@ extends Node
 export var boss_queue : Array
 export var player_summons : Array
 export var boss_index = 0
+export var hp_color_segment = [Color("#bb474f"), Color("#d65709"), Color("#db7209"), Color("#df8c00"), Color("#d7ac64")]
 
 var player_fire_patterns = {
 	1: {
@@ -51,3 +52,6 @@ func get_boss():
 
 func reset():
 	boss_index = 0
+
+func get_hp_color(segment):
+	return hp_color_segment[segment]
