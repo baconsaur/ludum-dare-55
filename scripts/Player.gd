@@ -7,6 +7,7 @@ signal hit
 signal mana_change
 
 export var start_mana = 0 # Debug
+export var god_mode_debug : bool = false
 export var speed : float = 200
 export var hit_radius : float = 3
 export var hit_time : float = 1
@@ -101,6 +102,9 @@ func heal(amount):
 	emit_signal("healed", current_hp)
 
 func take_hit(target=null):
+	if god_mode_debug:
+		return
+
 	animation_player.play("hit")
 	current_hp -= 1
 	hit_sound.play()

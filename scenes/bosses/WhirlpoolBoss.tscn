@@ -7,8 +7,8 @@
 
 [node name="WhirlpoolBoss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-max_hp = 100
-max_mana = 20
+max_hp = 12
+max_mana = 200
 summon_card = ExtResource( 3 )
 boss_name = "Leslie"
 pool_scene = ExtResource( 4 )

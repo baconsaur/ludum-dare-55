@@ -11,6 +11,7 @@
 script = ExtResource( 1 )
 boss_queue = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ) ]
 player_summons = [ ExtResource( 5 ) ]
+boss_index = 2
 hp_color_segment = [ Color( 0.733333, 0.278431, 0.309804, 1 ), Color( 0.839216, 0.345098, 0.576471, 1 ), Color( 0.858824, 0.403922, 0.85098, 1 ), Color( 0.658824, 0.4, 0.870588, 1 ), Color( 0.470588, 0.352941, 0.839216, 1 ) ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

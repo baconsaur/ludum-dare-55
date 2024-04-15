@@ -98,6 +98,7 @@ script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 71 )
+god_mode_debug = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
