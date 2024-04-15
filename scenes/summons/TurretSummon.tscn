@@ -130,7 +130,7 @@ anims/RESET = SubResource( 1 )
 anims/idle = SubResource( 2 )
 
 [node name="BaseTurret2" parent="." index="1" instance=ExtResource( 2 )]
-position = Vector2( -128, -64 )
+position = Vector2( -168, -8 )
 max_mana = 30.0
 max_hp = 12
 weakness_group = "boss"
@@ -154,7 +154,7 @@ anims/RESET = SubResource( 3 )
 anims/idle = SubResource( 4 )
 
 [node name="BaseTurret3" parent="." index="2" instance=ExtResource( 2 )]
-position = Vector2( 128, -64 )
+position = Vector2( 168, -8 )
 max_mana = 30.0
 max_hp = 12
 weakness_group = "boss"

@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://fonts/Micro_Chat.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Pause.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/GameController.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=5]
 [ext_resource path="res://sprites/pause_icon.png" type="Texture" id=6]
 [ext_resource path="res://sprites/target.png" type="Texture" id=7]
+[ext_resource path="res://sprites/sound_on.png" type="Texture" id=8]
+[ext_resource path="res://sprites/sound_off.png" type="Texture" id=9]
+[ext_resource path="res://fonts/Micro_Chat.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -39,12 +41,17 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -2, 1 ), Vector2( 1, -2 ), Vector2( -1, 1 ), Vector2( 1, 0 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="InputEventAction" id=7]
+action = "mute"
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
+
 [sub_resource type="DynamicFont" id=6]
 size = 5
 outline_size = 1
 outline_color = Color( 0.141176, 0.101961, 0.156863, 1 )
-extra_spacing_bottom = -3
-font_data = ExtResource( 1 )
+font_data = ExtResource( 11 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.282353, 0.419608, 0.498039, 1 )
@@ -113,12 +120,33 @@ custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
-[node name="PauseButton" type="TextureButton" parent="CanvasLayer/UI"]
-modulate = Color( 0.819608, 0.74902, 0.690196, 1 )
-margin_left = 491.0
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/UI"]
+margin_left = 474.0
 margin_top = 8.0
 margin_right = 504.0
 margin_bottom = 21.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+alignment = 1
+
+[node name="MuteButton" type="TextureButton" parent="CanvasLayer/UI/Buttons"]
+pause_mode = 2
+modulate = Color( 0.819608, 0.74902, 0.690196, 1 )
+margin_right = 13.0
+margin_bottom = 13.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+toggle_mode = true
+shortcut_in_tooltip = false
+shortcut = SubResource( 8 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer/UI/Buttons"]
+modulate = Color( 0.819608, 0.74902, 0.690196, 1 )
+margin_left = 17.0
+margin_right = 30.0
+margin_bottom = 13.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 shortcut_in_tooltip = false
@@ -126,7 +154,7 @@ texture_normal = ExtResource( 6 )
 
 [node name="SummonContainer" type="VBoxContainer" parent="CanvasLayer/UI"]
 margin_left = 8.0
-margin_top = 273.0
+margin_top = 270.0
 margin_right = 504.0
 margin_bottom = 280.0
 size_flags_vertical = 8
@@ -134,17 +162,18 @@ custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/SummonContainer"]
 margin_right = 496.0
-margin_bottom = 7.0
+margin_bottom = 10.0
 rect_pivot_offset = Vector2( 44, -104 )
 custom_fonts/font = SubResource( 6 )
 text = "SUMMONS"
 
 [node name="Summons" type="HBoxContainer" parent="CanvasLayer/UI/SummonContainer"]
-margin_top = 7.0
+margin_top = 10.0
 margin_right = 496.0
-margin_bottom = 7.0
+margin_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 0
+custom_constants/separation = 6
 
 [node name="Tutorial" parent="CanvasLayer/UI" instance=ExtResource( 3 )]
 visible = false
@@ -177,6 +206,19 @@ margin_bottom = 247.0
 [node name="Label" parent="CanvasLayer/UI/Tutorial/Background/MarginContainer/VBoxContainer/Container/HBoxContainer" index="0"]
 margin_right = 190.0
 margin_bottom = 230.0
+text = "Movement:
+  Keyboard: WASD, arrows
+  Controller: Left stick
+Fire:
+  Keyboard: Spacebar
+  Controller: A
+Switch targets:
+  Keyboard: Q/E
+  Controller: L/R
+Summons:
+  Keyboard: 1-3
+  Controller: B, X, Y
+Toggle sound: M"
 
 [node name="Label3" parent="CanvasLayer/UI/Tutorial/Background/MarginContainer/VBoxContainer/Container/HBoxContainer" index="1"]
 margin_left = 194.0
@@ -200,6 +242,7 @@ autoplay = "hover"
 anims/RESET = SubResource( 4 )
 anims/hover = SubResource( 3 )
 
-[connection signal="pressed" from="CanvasLayer/UI/PauseButton" to="." method="_on_PauseButton_pressed"]
+[connection signal="toggled" from="CanvasLayer/UI/Buttons/MuteButton" to="." method="_on_MuteButton_toggled"]
+[connection signal="pressed" from="CanvasLayer/UI/Buttons/PauseButton" to="." method="_on_PauseButton_pressed"]
 
 [editable path="CanvasLayer/UI/Tutorial"]

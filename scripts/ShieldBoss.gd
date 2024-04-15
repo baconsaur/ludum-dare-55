@@ -13,7 +13,7 @@ func prepare():
 		"collectible_frequency": 1,
 		"bullet_scene": "res://scenes/BossBullet.tscn",
 	},{
-		"rotation_speed": 95,
+		"rotation_speed": -95,
 		"fire_rate": 0.15,
 		"bullet_speed": 100,
 		"spawn_points": 5,

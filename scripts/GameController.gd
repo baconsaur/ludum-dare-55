@@ -1,7 +1,5 @@
 extends Node2D
 
-export var summon_cooldown : float = 5
-
 var game_over_menu = preload("res://scenes/GameOver.tscn")
 var level_complete_menu = preload("res://scenes/LevelComplete.tscn")
 var pause_menu = preload("res://scenes/Pause.tscn")
@@ -16,6 +14,7 @@ onready var camera = $Camera2D
 onready var ui = $CanvasLayer/UI
 onready var tutorial = $CanvasLayer/UI/Tutorial
 onready var summon_cards = $CanvasLayer/UI/SummonContainer/Summons
+onready var master_sound = AudioServer.get_bus_index("Master")
 
 func _ready():
 	if Globals.first_run:
@@ -107,9 +106,7 @@ func populate_summon_cards():
 		action_count += 1
 		card.connect("activated_summon", self, "activate_summon")
 
-func activate_summon(cost, summon_obj):
-	for card in summon_cards.get_children():
-		card.set_cooldown(true)
+func activate_summon(cost, summon_obj, card):
 	var summon = summon_obj.instance()
 	if summon.target == "player":
 		player.add_child(summon)
@@ -117,7 +114,7 @@ func activate_summon(cost, summon_obj):
 		add_child(summon)
 	if summon.target == "point":
 		summon.global_position = player.global_position
-	summon.connect("despawn", self, "despawn")
+	summon.connect("despawn", self, "despawn", [card])
 	player.pay_cost(cost)
 
 func update_hp(current_hp, hit=false):
@@ -146,14 +143,8 @@ func update_mana(current_mana):
 	for card in summon_cards.get_children():
 		card.update_mana(current_mana)
 
-func despawn():
-	set_timer(summon_cooldown, "end_summon_cooldown")
-
-func end_summon_cooldown(timer):
-	for card in summon_cards.get_children():
-		card.set_cooldown(false)
-		card.update_mana(player.mana)
-	timer.queue_free()
+func despawn(card):
+	card.cool_down()
 
 func set_timer(duration, callback):
 	var timer := Timer.new()
@@ -167,3 +158,7 @@ func set_timer(duration, callback):
 func _on_PauseButton_pressed():
 	var pause_instance = pause_menu.instance()
 	ui.add_child(pause_instance)
+
+
+func _on_MuteButton_toggled(button_pressed):
+	AudioServer.set_bus_mute(master_sound, button_pressed)

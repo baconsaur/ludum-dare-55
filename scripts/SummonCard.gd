@@ -5,6 +5,7 @@ signal activated_summon
 
 export var summon_obj : PackedScene
 export var mana_cost : int = 10
+export var cooldown_time : int = 5
 
 export var action_name : String
 var is_on_cooldown = false
@@ -38,11 +39,24 @@ func update_mana(current_mana):
 		button.disabled = false
 	set_mana_text()
 
-func set_cooldown(cooldown : bool):
-	is_on_cooldown = cooldown
+func cool_down():
+	var timer := Timer.new()
+	add_child(timer)
+	timer.wait_time = cooldown_time
+	timer.one_shot = true
+	timer.start()
+	timer.connect("timeout", self, "finish_cooldown", [timer])
+
+func finish_cooldown(timer):
+	is_on_cooldown = false
+	if summon_bar.value >= mana_cost:
+		button.disabled = false
+		cooldown_over_sound.play()
+	timer.queue_free()
 
 func activate_summon():
-	emit_signal("activated_summon", mana_cost, summon_obj)
+	is_on_cooldown = true
+	emit_signal("activated_summon", mana_cost, summon_obj, self)
 
 func set_mana_text():
 	mana_label.text = str(summon_bar.value) + "/" + str(mana_cost)

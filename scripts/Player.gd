@@ -89,6 +89,8 @@ func _on_Player_area_entered(area):
 	if area.is_in_group("collectible") and not overlapping_danger:
 		collect(area)
 	elif area.is_in_group("boss") and can_be_hit:
+		if "can_hit" in area and not area.can_hit:
+			return
 		take_hit(area)
 
 func heal(amount):

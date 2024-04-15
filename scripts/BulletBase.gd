@@ -3,6 +3,8 @@ extends Area2D
 
 export var speed : float = 100
 
+var can_hit = true
+
 onready var sprite = $Sprite
 onready var collider = $CollisionShape2D
 
