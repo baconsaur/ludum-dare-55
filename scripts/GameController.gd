@@ -113,7 +113,6 @@ func activate_summon(cost, summon_obj):
 	var summon = summon_obj.instance()
 	if summon.target == "player":
 		player.add_child(summon)
-		player.shield_up_sound.play()
 	else:
 		add_child(summon)
 	if summon.target == "point":

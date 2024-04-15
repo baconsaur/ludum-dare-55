@@ -27,8 +27,10 @@ onready var hit_sound = $Hit
 onready var die_sound = $Die
 onready var pattern_sound = $PatternChange
 onready var summon_sound = $Summon
+onready var name_label = $Control/VBoxContainer/Label
 
 func _ready():
+	name_label.text = boss_name
 	animation_player.play("RESET")
 	call_deferred("prepare") # Because _ready is stupid
 
@@ -88,7 +90,7 @@ func die():
 	animation_player.play("die")
 	animation_player.connect("animation_finished", self, "finish_dying")
 	die_sound.play()
-	if summon_card:
+	if summon_card and not summon_card in Globals.player_summons:
 		Globals.player_summons.append(summon_card)
 
 func summon_warning():

@@ -5,6 +5,8 @@ var segments = 1
 func _ready():
 	owner.connect("initialized", self, "set_init", [], CONNECT_ONESHOT)
 	owner.connect("hit", self, "update_hp")
+	if owner is Player:
+		owner.connect("healed", self, "update_hp")
 
 func set_init(_cm, _mm, segment_count=1):
 	max_value = owner.max_hp

@@ -33,14 +33,13 @@ func update_mana(current_mana):
 	summon_bar.update_mana(current_mana)
 	if is_on_cooldown or current_mana < mana_cost:
 		button.disabled = true
-	else:
+	elif button.disabled:
+		cooldown_over_sound.play()
 		button.disabled = false
 	set_mana_text()
 
 func set_cooldown(cooldown : bool):
 	is_on_cooldown = cooldown
-	if not cooldown:
-		cooldown_over_sound.play()
 
 func activate_summon():
 	emit_signal("activated_summon", mana_cost, summon_obj)
