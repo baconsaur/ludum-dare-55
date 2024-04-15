@@ -1,3 +1,4 @@
+class_name Player
 extends Area2D
 
 signal initialized
@@ -19,14 +20,20 @@ var mana = start_mana
 var is_dead = false
 var overlapping_danger = false
 var target_position = Vector2(0, -60)
+var upper_bound = Vector2.ZERO
+var lower_bound = Vector2.ZERO
 
 onready var mana_particles = $ManaParticles
 onready var mana_label = $HUD/Stats/Mana/ManaLabel
 onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
 
-
 func _ready():
+	var viewport_rect = get_viewport().get_visible_rect()
+	var sprite_size = Vector2(sprite.texture.get_width(), sprite.texture.get_height())
+	lower_bound = viewport_rect.position + sprite_size / 4 - viewport_rect.size / 2
+	upper_bound = viewport_rect.end - sprite_size / 4 - viewport_rect.size / 2
+	
 	emit_signal("initialized", 0, 0)
 
 func _process(delta):
@@ -34,20 +41,20 @@ func _process(delta):
 		return
 
 	if Input.is_action_pressed('up'):
-		position.y -= delta * speed
+		position.y = clamp(position.y - delta * speed, lower_bound.y, upper_bound.y)
 	if Input.is_action_pressed('down'):
-		position.y += delta * speed
+		position.y = clamp(position.y + delta * speed, lower_bound.y, upper_bound.y)
 	if Input.is_action_pressed('right'):
-		position.x += delta * speed
+		position.x = clamp(position.x + delta * speed, lower_bound.x, upper_bound.x)
 	if Input.is_action_pressed('left'):
-		position.x -= delta * speed
+		position.x = clamp(position.x - delta * speed, lower_bound.x, upper_bound.x)
 	
 	if Input.is_action_pressed('fire'):
 		fire()
 
 	if overlapping_danger and can_be_hit:
 		take_hit()
-		
+
 func fire():
 	if not can_fire or mana <= 0:
 		return
@@ -69,6 +76,12 @@ func _on_Player_area_entered(area):
 		collect(area)
 	elif area.is_in_group("boss") and can_be_hit:
 		take_hit(area)
+
+func heal(amount):
+	if current_hp >= max_hp:
+		return
+	current_hp += amount
+	emit_signal("hit", current_hp)
 
 func take_hit(target=null):
 	animation_player.play("hit")

@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/SummonCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/summons/ShieldSummon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/shield_card_disabled.png" type="Texture" id=3]
+[ext_resource path="res://sprites/shield_card.png" type="Texture" id=4]
 
 [node name="ShieldCard" instance=ExtResource( 1 )]
 summon_obj = ExtResource( 2 )
 mana_cost = 15
-action_name = "summon2"
+action_name = "summon3"
 
 [node name="Label" parent="CardData" index="0"]
 text = "Susan"
 
+[node name="Button" parent="CardData" index="1"]
+texture_normal = ExtResource( 4 )
+texture_pressed = null
+texture_disabled = ExtResource( 3 )
+
 [node name="Shortcut" parent="." index="1"]
-text = "2"
+text = "3"

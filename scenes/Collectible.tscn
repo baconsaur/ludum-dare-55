@@ -1,20 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/BulletBase.tscn" type="PackedScene" id=1]
-
-[sub_resource type="CanvasItemMaterial" id=5]
-blend_mode = 1
-
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.23743, 0.444134, 0.840782 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.266409, 0.266409, 0.266409, 1, 0.0614791, 0.0614791, 0.0614791, 1, 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture2D" id=4]
-gradient = SubResource( 3 )
-width = 24
-height = 24
-fill = 1
-fill_from = Vector2( 0.5, 0.5 )
+[ext_resource path="res://sprites/GlowSprite.tres" type="Texture" id=2]
+[ext_resource path="res://sprites/AddMaterial.tres" type="Material" id=3]
 
 [sub_resource type="CircleShape2D" id=2]
 resource_local_to_scene = true
@@ -26,8 +14,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Glow" type="Sprite" parent="." index="0"]
-material = SubResource( 5 )
-texture = SubResource( 4 )
+material = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 0 )

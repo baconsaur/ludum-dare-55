@@ -113,6 +113,8 @@ func activate_summon(cost, summon_obj):
 		player.add_child(summon)
 	else:
 		add_child(summon)
+	if summon.target == "point":
+		summon.global_position = player.global_position
 	summon.connect("despawn", self, "despawn")
 	player.pay_cost(cost)
 
@@ -157,3 +159,8 @@ func set_timer(duration, callback):
 	timer.one_shot = true
 	timer.start()
 	timer.connect("timeout", self, callback, [timer])
+
+
+func _on_PauseButton_pressed():
+	var pause_instance = pause_menu.instance()
+	ui.add_child(pause_instance)

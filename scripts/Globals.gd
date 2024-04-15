@@ -16,7 +16,7 @@ func get_boss():
 
 func reset():
 	boss_index = 0
-	player_summons = []
+	player_summons = [player_summons[0]]
 
 func get_hp_color(segment):
 	return hp_color_segment[segment]

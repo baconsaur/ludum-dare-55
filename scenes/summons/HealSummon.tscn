@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/BaseSummon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Heal.gd" type="Script" id=2]
+[ext_resource path="res://sprites/AddMaterial.tres" type="Material" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 41.0
+
+[sub_resource type="Gradient" id=6]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.223464, 0.628492, 0.703911 )
+colors = PoolColorArray( 0.453125, 0.453125, 0.453125, 1, 0.266409, 0.266409, 0.266409, 1, 0.0614791, 0.0614791, 0.0614791, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=4]
+resource_local_to_scene = true
+gradient = SubResource( 6 )
+width = 86
+height = 86
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.171171 ), 0.0, 0.0, 0, 0, Vector2( 0.630542, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.251397, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.760784, 1, 0.392405, 0.662975, 0 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0.455307, 0.703911 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.147679, 0.267537, 0 )
+
+[node name="HealSummon" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+target = "point"
+heal_interval = 1
+
+[node name="HealArea" type="Area2D" parent="." index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="HealArea" index="1"]
+material = ExtResource( 3 )
+texture = SubResource( 4 )
+
+[node name="AreaParticles" type="CPUParticles2D" parent="." index="1"]
+amount = 120
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 45.27
+spread = 0.0
+gravity = Vector2( 0, 0 )
+orbit_velocity = 2.0
+orbit_velocity_random = 1.0
+radial_accel = 2.0
+radial_accel_random = 1.0
+damping = 100.0
+scale_amount = 4.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 2 )
+
+[node name="DisperseTimer" type="Timer" parent="." index="2"]
+wait_time = 0.5
+one_shot = true
+
+[node name="HealTimer" type="Timer" parent="." index="3"]
+
+[node name="HealParticles" type="CPUParticles2D" parent="." index="4"]
+position = Vector2( 0, 4 )
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 2
+emission_rect_extents = Vector2( 24, 1 )
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 188.07
+initial_velocity_random = 0.76
+scale_amount = 3.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 5 )
+
+[connection signal="area_entered" from="HealArea" to="." method="_on_HealArea_area_entered"]
+[connection signal="area_exited" from="HealArea" to="." method="_on_HealArea_area_exited"]
