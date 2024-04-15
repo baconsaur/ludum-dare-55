@@ -2,6 +2,7 @@ class_name Player
 extends Area2D
 
 signal initialized
+signal healed
 signal hit
 signal mana_change
 
@@ -28,6 +29,13 @@ onready var mana_label = $HUD/Stats/Mana/ManaLabel
 onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
 
+onready var hit_sound = $Hit
+onready var die_sound = $Die
+onready var heal_sound = $Heal
+onready var pickup_sound = $Pickup
+onready var summon_sound = $Summon
+onready var shoot_sound = $Shoot
+
 func _ready():
 	var viewport_rect = get_viewport().get_visible_rect()
 	var sprite_size = Vector2(sprite.texture.get_width(), sprite.texture.get_height())
@@ -49,11 +57,16 @@ func _process(delta):
 	if Input.is_action_pressed('left'):
 		position.x = clamp(position.x - delta * speed, lower_bound.x, upper_bound.x)
 	
+	sprite.global_rotation = get_angle_to(target_position) + (90 * PI / 180)
+	
 	if Input.is_action_pressed('fire'):
 		fire()
 
 	if overlapping_danger and can_be_hit:
 		take_hit()
+	
+	if not animation_player.is_playing():
+		animation_player.play("idle")
 
 func fire():
 	if not can_fire or mana <= 0:
@@ -68,6 +81,7 @@ func fire():
 	bullet.position = global_position
 	bullet.rotation = get_angle_to(target_position)
 	bullet.sprite.modulate = sprite.modulate
+#	shoot_sound.play() Too annoying
 	can_fire = false
 	set_cooldown(fire_cooldown, "enable_fire")
 
@@ -81,11 +95,13 @@ func heal(amount):
 	if current_hp >= max_hp:
 		return
 	current_hp += amount
-	emit_signal("hit", current_hp)
+	heal_sound.play()
+	emit_signal("healed", current_hp)
 
 func take_hit(target=null):
 	animation_player.play("hit")
 	current_hp -= 1
+	hit_sound.play()
 	emit_signal("hit", current_hp)
 	
 	can_be_hit = false
@@ -103,6 +119,7 @@ func set_target(coords : Vector2):
 
 func collect(bullet):
 	mana += 1
+	pickup_sound.play()
 	mana_label.text = str(mana)
 	emit_signal("mana_change", mana)
 	mana_particles.emitting = true
@@ -130,8 +147,8 @@ func set_cooldown(cooldown_time, callback):
 func pay_cost(cost):
 	mana -= cost
 	mana_label.text = str(mana)
+	summon_sound.play()
 	emit_signal("mana_change", mana)
-
 
 func _on_Player_area_exited(area):
 	if area is Boss:

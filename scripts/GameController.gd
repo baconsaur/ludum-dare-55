@@ -32,10 +32,12 @@ func _ready():
 	update_hp(player.current_hp)
 	update_boss_hp(boss.current_hp)
 	player.connect("hit", self, "update_hp", [true])
+	player.connect("healed", self, "update_hp")
 	player.connect("mana_change", self, "update_mana")
 	boss.connect("hit", self, "update_boss_hp")
 	boss.connect("spawn_obj", self, "add_target")
 	boss.connect("despawn_obj", self, "remove_target")
+	boss.connect("shake", camera, "shake")
 	valid_targets.append(boss)
 	current_target = boss
 	
@@ -111,6 +113,7 @@ func activate_summon(cost, summon_obj):
 	var summon = summon_obj.instance()
 	if summon.target == "player":
 		player.add_child(summon)
+		player.shield_up_sound.play()
 	else:
 		add_child(summon)
 	if summon.target == "point":
@@ -123,21 +126,22 @@ func update_hp(current_hp, hit=false):
 		camera.shake()
 	if current_hp <= 0:
 		player.is_dead = true
+		player.die_sound.play()
 		set_timer(0.5, "game_over")
 
 func game_over(_timer):
 	var game_over_instance = game_over_menu.instance()
 	ui.add_child(game_over_instance)
 
-func next_level(_timer):
+func next_level():
 	var level_complete_instance = level_complete_menu.instance()
 	ui.add_child(level_complete_instance)
-	level_complete_instance.set_text(flavor_text)
+	level_complete_instance.call_deferred("set_text", flavor_text)
 
 func update_boss_hp(current_hp):
 	if current_hp <= 0:
 		camera.shake()
-		set_timer(0.5, "next_level")
+		boss.connect("tree_exited", self, "next_level", [], CONNECT_ONESHOT)
 
 func update_mana(current_mana):
 	for card in summon_cards.get_children():

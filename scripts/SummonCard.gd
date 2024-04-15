@@ -12,6 +12,7 @@ var is_on_cooldown = false
 onready var button = $CardData/Button
 onready var summon_bar = $CardData/SummonBar
 onready var mana_label = $CardData/SummonBar/ManaCost
+onready var cooldown_over_sound = $CooldownOver
 
 func _ready():
 	summon_bar.set_init(0, mana_cost)
@@ -38,6 +39,8 @@ func update_mana(current_mana):
 
 func set_cooldown(cooldown : bool):
 	is_on_cooldown = cooldown
+	if not cooldown:
+		cooldown_over_sound.play()
 
 func activate_summon():
 	emit_signal("activated_summon", mana_cost, summon_obj)

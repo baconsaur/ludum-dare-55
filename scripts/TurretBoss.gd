@@ -52,6 +52,7 @@ func summon():
 			turret.connect("tree_exited", self, "clear_turret_spawn", [spawn])
 			emit_signal("spawn_obj", spawn)
 			break
+	.summon()
 
 func clear_turret_spawn(spawn):
 	turrets[spawn] = null

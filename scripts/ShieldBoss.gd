@@ -39,6 +39,8 @@ func summon():
 	shield.initialize({"life_time": shield_life})
 	shield.connect("mana_change", self, "shield_countdown", [shield])
 	shield.connect("despawn", self, "shield_despawn")
+	animation_player.play("summon")
+	summon_sound.play()
 
 func shield_despawn():
 	summon_timer.start()
