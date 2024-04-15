@@ -5,3 +5,10 @@
 
 [node name="TurretCard" instance=ExtResource( 1 )]
 summon_obj = ExtResource( 2 )
+action_name = "summon1"
+
+[node name="Label" parent="CardData" index="0"]
+text = "Steve"
+
+[node name="Shortcut" parent="." index="1"]
+text = "1"

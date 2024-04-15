@@ -8,6 +8,8 @@
 [node name="TurretBoss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 summon_card = ExtResource( 4 )
+flavor_text = "Good job beating up Steve! Summon him to build fish turrets!"
+boss_name = "Steve"
 turret_scene = ExtResource( 3 )
 turret_hp = 5
 turret_life = 30

@@ -11,6 +11,8 @@ max_hp = 75
 max_mana = 16
 pattern = 3
 summon_card = ExtResource( 4 )
+flavor_text = "You kicked Susan's ass! Summon her to protect you with an ink shield"
+boss_name = "Susan"
 shield_scene = ExtResource( 3 )
 shield_life = 8.0
 

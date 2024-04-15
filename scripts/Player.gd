@@ -4,7 +4,7 @@ signal initialized
 signal hit
 signal mana_change
 
-export var start_mana = 25 # Debug
+export var start_mana = 0 # Debug
 export var speed : float = 200
 export var hit_radius : float = 3
 export var hit_time : float = 1
@@ -18,6 +18,7 @@ var can_be_hit = true
 var mana = start_mana
 var is_dead = false
 var overlapping_danger = false
+var target_position = Vector2(0, -60)
 
 onready var mana_particles = $ManaParticles
 onready var mana_label = $HUD/Stats/Mana/ManaLabel
@@ -41,15 +42,12 @@ func _process(delta):
 	if Input.is_action_pressed('left'):
 		position.x -= delta * speed
 	
-	if overlapping_danger and can_be_hit:
-		take_hit()
-
-func _unhandled_input(event):
-	if is_dead:
-		return
-	if Input.is_action_pressed("fire"):
+	if Input.is_action_pressed('fire'):
 		fire()
 
+	if overlapping_danger and can_be_hit:
+		take_hit()
+		
 func fire():
 	if not can_fire or mana <= 0:
 		return
@@ -61,7 +59,7 @@ func fire():
 	bullet.add_to_group("player")
 	get_tree().current_scene.add_child(bullet)
 	bullet.position = global_position
-	bullet.rotation = get_angle_to(get_global_mouse_position())
+	bullet.rotation = get_angle_to(target_position)
 	bullet.sprite.modulate = sprite.modulate
 	can_fire = false
 	set_cooldown(fire_cooldown, "enable_fire")
@@ -86,6 +84,9 @@ func take_hit(target=null):
 		target.queue_free()
 	elif target is Boss:
 		overlapping_danger = true
+
+func set_target(coords : Vector2):
+	target_position = coords
 
 func collect(bullet):
 	mana += 1

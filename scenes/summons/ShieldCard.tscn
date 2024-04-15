@@ -6,3 +6,10 @@
 [node name="ShieldCard" instance=ExtResource( 1 )]
 summon_obj = ExtResource( 2 )
 mana_cost = 15
+action_name = "summon2"
+
+[node name="Label" parent="CardData" index="0"]
+text = "Susan"
+
+[node name="Shortcut" parent="." index="1"]
+text = "2"

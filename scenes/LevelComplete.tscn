@@ -16,14 +16,18 @@ script = ExtResource( 3 )
 text = "Level Complete"
 
 [node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer/Container" index="0"]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -7.0
-margin_bottom = 7.0
+margin_left = -184.0
+margin_top = -61.5
+margin_right = 184.0
+margin_bottom = 61.5
 custom_fonts/font = SubResource( 10 )
-text = "Lorem ipsum dolor sit amet"
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum sapien ac tortor congue porttitor. In sed sollicitudin neque. Donec convallis ullamcorper neque, nec faucibus ligula pulvinar sed. Nulla eleifend leo ut erat commodo lobortis. Duis at eleifend sem, sagittis ultrices nulla."
 align = 1
+autowrap = true
 
 [node name="Button" parent="Background/MarginContainer/VBoxContainer" index="2"]
 text = "Next Level"

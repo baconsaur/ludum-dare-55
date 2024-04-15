@@ -5,43 +5,7 @@ export var player_summons : Array
 export var boss_index = 0
 export var hp_color_segment = [Color("#bb474f"), Color("#d65709"), Color("#db7209"), Color("#df8c00"), Color("#d7ac64")]
 
-var player_fire_patterns = {
-	1: {
-		"rotation_speed": 120,
-		"fire_rate": 0.2,
-		"spawn_points": 3,
-		"bullet_scene": "res://scenes/PlayerBullet.tscn",
-	},
-	2: {
-		"rotation_speed": 120,
-		"fire_rate": 0.15,
-		"spawn_points": 4,
-		"bullet_scene": "res://scenes/PlayerBullet.tscn",
-	}
-}
-
-var summon_data = {
-	1: {
-		"cost": 10,
-		"scene": "res://scenes/Turret.tscn",
-		"init_data": {
-			"life_time": 30,
-			"pattern": player_fire_patterns[1],
-			"max_hp": 20,
-			"weakness_group": "boss",
-		},
-	},
-	2: {
-		"cost": 20,
-		"scene": "res://scenes/Turret.tscn",
-		"init_data": {
-			"life_time": 30,
-			"pattern": player_fire_patterns[2],
-			"max_hp": 30,
-			"weakness_group": "boss",
-		},
-	},
-}
+var first_run = true
 
 func get_boss():
 	if boss_index >= boss_queue.size():
@@ -52,6 +16,7 @@ func get_boss():
 
 func reset():
 	boss_index = 0
+	player_summons = []
 
 func get_hp_color(segment):
 	return hp_color_segment[segment]

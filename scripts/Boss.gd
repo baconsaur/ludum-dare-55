@@ -4,11 +4,15 @@ extends Area2D
 signal initialized
 signal hit
 signal mana_change
+signal spawn_obj
+signal despawn_obj
 
 export var max_hp = 50
 export var max_mana = 15
 export var pattern = 1
 export var summon_card : PackedScene
+export var flavor_text = "Lorem ipsum"
+export var boss_name = "Ted"
 
 var boss_patterns = []
 var current_pattern = 0
