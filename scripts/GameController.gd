@@ -6,7 +6,10 @@ var pause_menu = preload("res://scenes/Pause.tscn")
 var boss : Boss
 var valid_targets = []
 var current_target : Node2D
+# For level end modal
 var flavor_text = ""
+var win_title = ""
+var summon_icon = null
 
 onready var player = $Player
 onready var target_indicator = $TargetIndicator
@@ -40,7 +43,9 @@ func _ready():
 	valid_targets.append(boss)
 	current_target = boss
 	
+	win_title = boss.win_title
 	flavor_text = boss.flavor_text
+	summon_icon = boss.summon_icon
 	
 	populate_summon_cards()
 
@@ -132,7 +137,7 @@ func game_over(_timer):
 func next_level():
 	var level_complete_instance = level_complete_menu.instance()
 	ui.add_child(level_complete_instance)
-	level_complete_instance.call_deferred("set_text", flavor_text)
+	level_complete_instance.call_deferred("set_text", win_title, flavor_text, summon_icon)
 
 func update_boss_hp(current_hp):
 	if current_hp <= 0:

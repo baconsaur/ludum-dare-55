@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/SummonCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/summons/ShieldSummon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/shield_card_disabled.png" type="Texture" id=3]
 [ext_resource path="res://sprites/shield_card.png" type="Texture" id=4]
+[ext_resource path="res://sprites/buttons4.png" type="Texture" id=5]
 
 [node name="ShieldCard" instance=ExtResource( 1 )]
 summon_obj = ExtResource( 2 )
@@ -20,3 +21,6 @@ texture_disabled = ExtResource( 3 )
 
 [node name="Shortcut" parent="." index="1"]
 text = "3"
+
+[node name="ControllerShortcut" parent="." index="2"]
+texture = ExtResource( 5 )

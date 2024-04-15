@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://sprites/summon_card.png" type="Texture" id=1]
 [ext_resource path="res://sprites/summon_card_disabled.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fonts/Micro_Chat.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://fonts/Outward_Bound.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://sounds/summon_cooldown.wav" type="AudioStream" id=8]
+[ext_resource path="res://sprites/buttons1.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 5
@@ -102,6 +103,14 @@ margin_right = 9.0
 margin_bottom = 20.0
 custom_fonts/font = SubResource( 3 )
 text = "0"
+
+[node name="ControllerShortcut" type="TextureRect" parent="."]
+visible = false
+margin_left = -2.0
+margin_top = 6.0
+margin_right = 7.0
+margin_bottom = 15.0
+texture = ExtResource( 9 )
 
 [node name="CooldownOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

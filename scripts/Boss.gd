@@ -12,8 +12,10 @@ export var max_hp = 50
 export var max_mana = 15
 export var pattern = 1
 export var summon_card : PackedScene
-export var flavor_text = "Lorem ipsum"
 export var boss_name = "Ted"
+export(String, MULTILINE) var flavor_text = "Good jorb"
+export var win_title = "You win"
+export var summon_icon : Texture
 
 var boss_patterns = []
 var current_pattern = 0

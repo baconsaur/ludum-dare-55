@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/Tomorrow_Night.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/LevelComplete.gd" type="Script" id=3]
+[ext_resource path="res://sprites/heal_card.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=10]
 size = 8
@@ -13,23 +14,34 @@ pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="Title" parent="Background/MarginContainer/VBoxContainer" index="0"]
-text = "Level Complete"
+text = "Unlocked [ability]!"
 
-[node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer/Container" index="0"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -184.0
-margin_top = -61.5
-margin_right = 184.0
-margin_bottom = 61.5
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer/VBoxContainer/Container" index="0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/Container/VBoxContainer" index="0"]
+margin_right = 368.0
+margin_bottom = 171.0
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer/Container/VBoxContainer" index="1"]
+margin_top = 175.0
+margin_right = 368.0
+margin_bottom = 226.0
+size_flags_vertical = 5
 custom_fonts/font = SubResource( 10 )
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum sapien ac tortor congue porttitor. In sed sollicitudin neque. Donec convallis ullamcorper neque, nec faucibus ligula pulvinar sed. Nulla eleifend leo ut erat commodo lobortis. Duis at eleifend sem, sagittis ultrices nulla."
+text = "You impressed Ted with your combat skills!
+
+Now you can summon them to [ability]"
 align = 1
+valign = 1
 autowrap = true
 
 [node name="Button" parent="Background/MarginContainer/VBoxContainer" index="2"]
-text = "Next Level"
+text = "Continue"
 
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

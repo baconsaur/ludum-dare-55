@@ -9,11 +9,14 @@ export var cooldown_time : int = 5
 
 export var action_name : String
 var is_on_cooldown = false
+var controller_checked = false
 
 onready var button = $CardData/Button
 onready var summon_bar = $CardData/SummonBar
 onready var mana_label = $CardData/SummonBar/ManaCost
 onready var cooldown_over_sound = $CooldownOver
+onready var shortcut = $Shortcut
+onready var controller_shortcut = $ControllerShortcut
 
 func _ready():
 	summon_bar.set_init(0, mana_cost)
@@ -21,6 +24,12 @@ func _ready():
 	button.connect("pressed", self, "activate_summon")
 
 func _process(delta):
+	if not controller_checked:
+		if Input.get_connected_joypads().size() and not controller_shortcut.visible:
+			controller_shortcut.visible = true
+			shortcut.visible = false
+		controller_checked = true
+		
 	if not action_name or button.disabled:
 		return
 

@@ -1,18 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/BaseBoss.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/TurretBoss.gd" type="Script" id=2]
 [ext_resource path="res://scenes/BossTurret.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/summons/TurretCard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/octopus1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/turret_card.png" type="Texture" id=6]
 
 [node name="TurretBoss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 summon_card = ExtResource( 4 )
-flavor_text = "Good job beating up Steve! Summon him to build fish turrets!"
 boss_name = "Steve"
+flavor_text = "You impressed Steve with your combat skills!
+
+Now you can summon him to place anemone turrets"
+win_title = "Unlocked Steve's Turrets"
+summon_icon = ExtResource( 6 )
 turret_scene = ExtResource( 3 )
 turret_hp = 5
 turret_life = 30
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 5 )
 
 [node name="Node2D" type="Node2D" parent="TurretSpawns" index="0"]
 position = Vector2( -128, -48 )
