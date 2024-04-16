@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ludum Dare 55"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 boot_splash/image="res://tetralogo-large.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false

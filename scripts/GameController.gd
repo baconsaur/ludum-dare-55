@@ -15,17 +15,17 @@ onready var player = $Player
 onready var target_indicator = $TargetIndicator
 onready var camera = $Camera2D
 onready var ui = $CanvasLayer/UI
-onready var tutorial = $CanvasLayer/UI/Tutorial
+onready var intro = $CanvasLayer/UI/Intro
 onready var summon_cards = $CanvasLayer/UI/SummonContainer/Summons
 onready var master_sound = AudioServer.get_bus_index("Master")
 
 func _ready():
 	if Globals.first_run:
-		tutorial.visible = true
+		intro.visible = true
 		Globals.first_run = false
 	else:
 		get_tree().paused = false
-		tutorial.queue_free()
+		intro.queue_free()
 	
 	var current_boss = Globals.get_boss()
 	boss = current_boss.instance()
