@@ -15,7 +15,9 @@ summon_card = ExtResource( 3 )
 boss_name = "Leslie"
 flavor_text = "You impressed Leslie with your combat skills!
 
-Now you can summon them to create a whirlpool"
+Now you can summon them to create a whirlpool
+
+Leslie is the last octopus, but if you continue, you can keep your summons and challenge them all again"
 win_title = "Unlocked Leslie's Whirlpool"
 summon_icon = ExtResource( 6 )
 pool_scene = ExtResource( 4 )

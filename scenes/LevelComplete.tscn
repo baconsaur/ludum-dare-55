@@ -22,16 +22,16 @@ anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer/Container/VBoxContainer" index="0"]
 margin_right = 368.0
-margin_bottom = 171.0
+margin_bottom = 181.0
 size_flags_vertical = 3
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="Background/MarginContainer/VBoxContainer/Container/VBoxContainer" index="1"]
-margin_top = 175.0
+margin_top = 185.0
 margin_right = 368.0
-margin_bottom = 226.0
+margin_bottom = 236.0
 size_flags_vertical = 5
 custom_fonts/font = SubResource( 10 )
 text = "You impressed Ted with your combat skills!

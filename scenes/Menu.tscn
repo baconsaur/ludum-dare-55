@@ -1,6 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fonts/Tomorrow_Night.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/MenuTitleFont.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.282353, 0.419608, 0.498039, 0.72549 )
@@ -13,10 +14,6 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="DynamicFont" id=4]
-extra_spacing_bottom = -7
-font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 8
@@ -68,14 +65,14 @@ alignment = 1
 
 [node name="Title" type="Label" parent="Background/MarginContainer/VBoxContainer"]
 margin_right = 368.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 4 )
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 2 )
 text = "Lorem Ipsum"
 align = 1
 
 [node name="Container" type="Control" parent="Background/MarginContainer/VBoxContainer"]
 pause_mode = 2
-margin_top = 27.0
+margin_top = 17.0
 margin_right = 368.0
 margin_bottom = 253.0
 size_flags_vertical = 3

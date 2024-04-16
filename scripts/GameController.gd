@@ -128,6 +128,7 @@ func update_hp(current_hp, hit=false):
 	if current_hp <= 0:
 		player.is_dead = true
 		player.die_sound.play()
+		player.animation_player.play("die")
 		set_timer(0.5, "game_over")
 
 func game_over(_timer):
